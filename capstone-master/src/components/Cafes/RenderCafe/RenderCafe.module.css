@@ -1,0 +1,4 @@
+.eachCafe:hover {
+    background-color: #f2f2f2;
+    -webkit-transform: scale(1.03);
+}
