@@ -1,10 +1,10 @@
-import React from 'react';
-import {useEffect, useState} from "react";
-import NavigationItem from './NavigationItem/NavigationItem';
-import classes from './NavigationItems.module.css';
-import logo from '../../../assets/logo.png';
-import {  NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React from "react";
+import { useState } from "react";
+import NavigationItem from "./NavigationItem/NavigationItem";
+import classes from "./NavigationItems.module.css";
+import logo from "../../../assets/logo.png";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const token = localStorage.getItem("token");
 
@@ -12,46 +12,67 @@ if (token) {
   axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
 }
 
-function NavigationItems(token)  {
+const imageClick = () => {
+  window.location.href = "http://localhost:3000/";
+};
 
+function NavigationItems(props) {
   const [user] = useState(localStorage.getItem("token"));
-  
-  return(
 
-  <div>
-    <ul className={classes.NavigationItems}>
-    <NavigationItem><NavLink to="/">Home</NavLink></ NavigationItem>
-    <NavigationItem><NavLink to="/whoweare"> Who we are </NavLink></ NavigationItem>
-    <NavigationItem><NavLink to="/filter"> Restaurants & Cafes </NavLink></ NavigationItem>
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.reload();
+  }
 
-    <img src={logo}  alt="Logo" />
-
-    { !user
-       ? ( 
-         <>
-        <div>
-        <NavigationItem><NavLink to="/signup"> Sign Up blah blah </NavLink> </ NavigationItem>
-        <NavigationItem><NavLink to="/login"> Login </NavLink> </ NavigationItem>
-        <NavigationItem><NavLink to="/contact"> Contact </NavLink> </ NavigationItem>
+  return (
+    <div className={classes.NavigationItems}>
+      <div>
+        <NavigationItem>
+          <NavLink to="/">Home</NavLink>
+        </NavigationItem>
+        <NavigationItem>
+          <NavLink to="/whoweare"> Who we are </NavLink>
+        </NavigationItem>
+        <NavigationItem>
+          <NavLink to="/filter"> Restaurants & Cafes </NavLink>
+        </NavigationItem>
         </div>
-        </>
-       )
-: 
-(
-     <div>
-     <NavigationItem><NavLink to="/profile"> My profile </NavLink> </ NavigationItem>
-     <NavigationItem><NavLink to="/contact"> Contact </NavLink> </ NavigationItem>
-     <NavigationItem><NavLink to="/signout"> Log Out </NavLink> </ NavigationItem>
-     </div>
-)
 
-    }
+        <img
+          src={logo}
+          alt="Logo"
+          style={{ cursor: "pointer" }}
+          onClick={imageClick}
+        />
 
-    
-    </ul>
+        {props.log ? 
+          <div>
+            <NavigationItem>
+              <NavLink to="/profile"> My profile </NavLink>{" "}
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink to="/contact"> Contact </NavLink>{" "}
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink to="/" onClick={logout}> Log Out </NavLink>{" "}
+            </NavigationItem>
+          </div>
+         : 
+          <div>
+            <NavigationItem>
+              <NavLink to="/signup"> Sign up</NavLink>{" "}
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink to="/login"> Login </NavLink>{" "}
+            </NavigationItem>
+            <NavigationItem>
+              <NavLink to="/contact"> Contact </NavLink>{" "}
+            </NavigationItem>
+          </div>
+        }
+      </div>
 
-  </div>
-  )
+  );
 }
 
 export default NavigationItems;

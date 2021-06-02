@@ -1,12 +1,11 @@
 import React from 'react';
-import NavigationItems from '../../../components/Navigation/NavigationItems/NavigationItems';
 import PartnerItems from '../../../components/Partners/PartnerItems';
 import MissionItems from '../../../components/Mission/MissionItems';
 import About from '../../../components/About/About';
-import Footer from '../../../components/Footer/Footer.js';
 import Text from '../../../components/Text/Text.js';
 import backImg from '../../../assets/backImg.jpeg';
 import classes from '../Main.module.css';
+
 
 const mainItems = () => (
 
@@ -19,7 +18,9 @@ const mainItems = () => (
       <img src={backImg}
            alt="logo"
            style={{width: '100%',
-                   position: 'relative'}}/>
+                   position: 'relative',
+           }}
+                   />
     </div>
 
     <MissionItems />

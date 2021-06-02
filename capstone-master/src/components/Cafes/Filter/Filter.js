@@ -1,94 +1,87 @@
-import React, {Component} from 'react';
-import classes from './Filter.module.css';
-import { cafe } from "../../../data.json";
+import React from "react";
+import classes from "./Filter.module.css";
 
 class Filter extends React.Component {
+  render() {
+    const cuisine = [
+      "Dessert",
+      "Fresh, Ice Cream",
+      "Coffee and Tea",
+      "Burger & Sandwich",
+      "Pizza",
+      "BBQ, Kebab",
+      "Sushi",
+      "Chicken Grill",
+      "Khash",
+      "Lahmajo",
+      "Breakfast",
+      "Lunch",
+      "Dinner",
+      "Asian",
+    ];
 
-render(){
+    const location = [
+      "Ajapnyak",
+      "Arabkir",
+      "Avan",
+      "Davtashen",
+      "Erebuni",
+      "Kanaker-Zeytun",
+      "Kentron",
+      "Malatia-Sebastia",
+      "Nork-Marash",
+      "Nor Nork",
+      "Nubarashen",
+      "Shengavit",
+    ];
 
-	const cuisine = [
-		"Dessert",
-		 "Fresh, Ice Cream",
-		 "Coffee and Tea",
-		  "Burger & Sandwich",
-			 "Pizza",
-			 "BBQ, Kebab",
-			  "Sushi",
-				"Chicken Grill",
-				"Khash",
-				"Lahmajo",
-				"Breakfast",
-				"Lunch",
-				"Dinner" ,
-				"Asian"
-			];
+    const activity = [
+      "Work & Study",
+      "Friends Time",
+      "Music and Concerts",
+      "Hookah & Cigars",
+      "Friday Night",
+      "Wine & Cheese",
+      "Beer House & Pub",
+      "For Kids",
+    ];
 
-	const location = [
-				"Ajapnyak",
-				"Arabkir",
-				"Avan",
-				"Davtashen",
-				"Erebuni",
-				"Kanaker-Zeytun",
-				"Kentron",
-				"Malatia-Sebastia",
-				"Nork-Marash",
-				"Nor Nork",
-				"Nubarashen",
-				"Shengavit"
-	];
+    return (
+      <div>
+        <h1>Sort by</h1>
 
-	const activity = [
-				"Work & Study",
-				"Friends Time",
-				"Music and Concerts",
-				"Hookah & Cigars",
-				"Friday Night",
-				"Wine & Cheese",
-				"Beer House & Pub",
-				"For Kids"
-	];
+        <div className={classes.sort}>
+          <h3>Cuisine</h3>
+          {cuisine.map((name) => (
+            <li className={classes.list}>
+              <input type="checkbox" id="scales" name="scales" />
+              <p className={classes.link}>{name}</p>
+            </li>
+          ))}
+        </div>
 
-  return(
-		<div>
-		<h1>Sort by</h1>
+        <div className={classes.sort}>
+          <h3>District</h3>
+          {location.map((name) => (
+            <li className={classes.list}>
+              <input type="radio" id="scales" name="scales" />
+              <p className={classes.link}>{name}</p>
+            </li>
+          ))}
+        </div>
 
-		<div className={classes.sort}>
-		<h3>Cuisine</h3>
-			{cuisine.map((name) => (
-				<li className={classes.list}>
-					<input type="checkbox" id="scales" name="scales"
-         	 />
-					<a className={classes.link}>{name}</a>
-				</li>
-			))}
-			</div>
-
-			<div className={classes.sort}>
-			<h3>District</h3>
-				{location.map((name) => (
-					<li className={classes.list}>
-					<input type="checkbox" id="scales" name="scales"
-         	 />
-						<a className={classes.link}>{name}</a>
-					</li>
-				))}
-				</div>
-
-				<div className={classes.sort}>
-				<h3>Activity</h3>
-					{activity.map((name) => (
-						<li className={classes.list}>
-						<input type="checkbox" id="scales" name="scales"
-	         	 />
-							<a className={classes.link}>{name}</a>
-						</li>
-					))}
-					</div>
-
-		</div>
-  )
-}
+        <div className={classes.sort}>
+          <h3>Activity</h3>
+          {activity.map((name) => (
+            <li className={classes.list}>
+              <input type="checkbox" id="scales" name="scales" />
+              <p className={classes.link}>{name}</p>
+            </li>
+          ))}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Filter;

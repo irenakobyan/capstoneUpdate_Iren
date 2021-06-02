@@ -2,3 +2,18 @@
     background-color: #f2f2f2;
     -webkit-transform: scale(1.03);
 }
+
+.eachCafe {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.renderCafe {
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}

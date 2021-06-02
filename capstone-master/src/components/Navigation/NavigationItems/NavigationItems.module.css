@@ -10,6 +10,10 @@
   background-color: white;
 }
 
+.NavigationItems div {
+  display: flex;
+}
+
 .NavigationItems img {
   width: 7%;
   margin: 1.3%;

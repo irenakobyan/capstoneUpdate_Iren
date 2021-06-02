@@ -1,7 +1,28 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import classes from "./Profile.module.css";
+import axios from "axios";
 
 export default function Profile() {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
+  }
+
+  let pathArray = window.location.pathname.split("/");
+  let id = pathArray[2];
+
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    firstName: "",
+    lastName: ""
+  });
+  
+  async function fetchUserFromServer() {
+    const result = await axios.get(`http://localhost:8050/users/${id}`);
+    console.log(result);
+  }
 
   const account = [
         "Edit password",

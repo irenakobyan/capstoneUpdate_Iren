@@ -2,28 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Text from "../../components/Text/Text.js";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import jwt_decode from "jwt-decode";
 
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
-import { Hidden } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(10),
     marginBottom: theme.spacing(10),
-    margin: 'auto',
-    width: '80%',
+    margin: "auto",
+    width: "80%",
     display: "flex",
     alignItems: "center",
   },
@@ -42,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     overflowY: "hidden",
-    height: "500px"
-  }
+    height: "500px",
+  },
 }));
 
 export default function MyCafe() {
@@ -54,11 +48,7 @@ export default function MyCafe() {
     axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
   }
 
-  // let decoded = jwt_decode(localStorage.getItem("token")).userId;
-  // console.log(decoded);
-
   const classes = useStyles();
-  const { updateToken } = useContext(AuthContext);
 
   const [values, setValues] = useState({
     reviews: "",
@@ -70,7 +60,6 @@ export default function MyCafe() {
 
   async function fetchCafesFromServer() {
     const result = await axios.get(`http://localhost:8050/cafes/${id}`);
-    console.log(result);
     setCafes(result.data);
   }
 
@@ -93,7 +82,6 @@ export default function MyCafe() {
     e.preventDefault();
     try {
       const result = await AddReview(values);
-      // localStorage.setItem("token", response.data.token);
       history.push("/filter");
     } catch (e) {
       setErrorMessage(e.response?.data.message || "Something went wrong");
@@ -111,25 +99,19 @@ export default function MyCafe() {
   return (
     <div>
       <div className={classes.image}>
-      <img
-        src={cafes.selectedFile}
-        alt="cafe_picture"
-    
-      />
+        <img src={cafes.selectedFile} alt="cafe_picture" />
       </div>
 
       <div className={classes.paper}>
-
         <div className={classes.MainItems}>
           <Text
             head={cafes.name}
             par={cafes.description}
-            head1={"Cafe Address: "+ cafes.street_name}
+            head1={"Cafe Address: " + cafes.street_name}
           />
         </div>
 
         <div>
-
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -167,11 +149,8 @@ export default function MyCafe() {
               Add a Rating
             </Button>
           </form>
-
         </div>
-
       </div>
-      
     </div>
   );
 }

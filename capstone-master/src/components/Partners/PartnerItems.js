@@ -1,24 +1,45 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Text from '../Text/Text.js';
-import { cafe } from "../../data.json";
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
 import classes from './PartnerItems.module.css';
+import RenderCafe from '../../components/Cafes/RenderCafe/RenderCafe.js';
 
-const partnerItems = () => (
+export default function PartnerItems() {
+  const [cafes, setCafes] = useState([]);
+
+  let history = useHistory();
+
+  async function fetchCafesFromServer() {
+    const result = await axios.get('http://localhost:8050/cafes');
+    setCafes(result.data);
+}
+
+useEffect(() => {
+    fetchCafesFromServer();
+}, []);
+
+return (
 <div  className={classes.PartnerAll}>
-  <Text head="Our Partner Restaurtants and Cafes" par="We work with more than 50 restaurants and cafes located in Yerevan!" />
+  <Text head="Our Partner Restaurants and Cafes" par="We work with more than 50 restaurants and cafes located in Yerevan!" />
    <div className={classes.PartnerItems}>
-        {cafe.slice(0,3).map(cafe => (
-          <div className={classes.eachBox}>
-            <img src={cafe.logo} style={{width: '50%'}}/>
-            <p>{cafe.name} <br />
-               Review: <b>{cafe.review}</b> <br />
-               Address: {cafe.address} <br />
-               Contact: {cafe.phone}</p>
-          </div>
-        ))}
+   { cafes.slice(0, 3).map((cafe) => (
+          <div  className={classes.eachCafe} onClick={() => {
+            history.push('mycafe' + '/' + cafe._id)
+          }}>
+          <img src={cafe.selectedFile} style={{width: '50%'}}/>
+     <p>
+         <b>{cafe.name}</b> <br />
+        Address: {cafe.street_name} <br />
+        District: {cafe.district} <br />
+     </p>
+       </div>
+    
+    ))}
     </div>
     <a href="/filter" className={classes.button1}>View More</a>
   </div>
 )
 
-export default partnerItems;
+};
+

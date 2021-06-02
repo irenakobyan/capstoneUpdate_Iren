@@ -1,5 +1,4 @@
 import React from 'react';
-import Text from '../Text/Text.js';
 import classes from './Footer.module.css';
 
 const headerItems = () => (

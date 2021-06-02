@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import axios from 'axios';
 import FileBase from 'react-file-base64';
 import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -100,7 +96,6 @@ const Form = ({ currentId, setCurrentId }) => {
     description: ""
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputValue = (e) => {
     const { name, value} = e.target;
@@ -108,17 +103,6 @@ const Form = ({ currentId, setCurrentId }) => {
       ...values,
       [name]: value,
     });
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await getUserToken(values);
-      localStorage.setItem("token", response.data.token);
-     // history.push("/filter");
-    } catch (e) {
-      setErrorMessage(e.response?.data.message || "Something went wrong");
-    }
   };
 
   const getUserToken = (values) => {
@@ -139,18 +123,6 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   const classes = useStyles();
-
-  const handleCuisine = (event) => {
-   setCuisine(event.target.value);
- };
-
- const handleLocation = (event) => {
-  setLocation(event.target.value);
-};
-
-const handleActivity = (event) => {
- setActivity(event.target.value);
-};
 
   const clear = () => {
     setCurrentId(0);
