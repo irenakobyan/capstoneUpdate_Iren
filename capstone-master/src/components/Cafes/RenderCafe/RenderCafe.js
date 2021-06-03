@@ -25,6 +25,7 @@ export default function RenderCafe(props) {
     <div className={classes.renderCafe}>
       {filteredCafes.map((cafe) => (
         <div
+          key={cafe._id}
           className={classes.eachCafe}
           onClick={() => {
             history.push("mycafe/" + cafe._id);

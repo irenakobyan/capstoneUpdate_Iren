@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -12,7 +12,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +45,7 @@ export default function Login() {
     username: "",
     password: "",
   });
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputValue = (e) => {
@@ -61,7 +61,7 @@ export default function Login() {
     try {
       const response = await getUserToken(values);
       localStorage.setItem("token", response.data.token);
-      history.push("/filter");
+        history.push("profile/" + values._id);
     } catch (e) {
       setErrorMessage(e.response?.data.message || "Something went wrong");
     }
@@ -75,6 +75,9 @@ export default function Login() {
     });
   };
 
+  const token = localStorage.getItem("token");
+
+  if(!token) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -109,6 +112,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+          
           >
             Sign In
           </Button>
@@ -123,4 +127,8 @@ export default function Login() {
       </div>
     </Container>
   );
+  }
+  else{
+    return <h1>User already Logged In</h1>
+  }
 }

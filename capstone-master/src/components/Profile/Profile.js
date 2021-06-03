@@ -1,6 +1,7 @@
-import React, {Component, useState} from 'react';
+import React, { useState} from 'react';
 import classes from "./Profile.module.css";
 import axios from "axios";
+import Login from '../Login/Login.js';
 
 export default function Profile() {
   const token = localStorage.getItem("token");
@@ -22,6 +23,7 @@ export default function Profile() {
   async function fetchUserFromServer() {
     const result = await axios.get(`http://localhost:8050/users/${id}`);
     console.log(result);
+    setValues(result.data);
   }
 
   const account = [
@@ -29,25 +31,42 @@ export default function Profile() {
         "Edit profile"
   ];
 
+  if(token){
     return(
         <div className={classes.profile}>
 
         <div>
-        <h3>Account Settings</h3>
-          {account.map((name) => (
-            <li className={classes.list}>
-              <a className={classes.link}>{name}</a>
-            </li>
-          ))}
+          <h3>Account Settings</h3>
+            {account.map((name) => (
+              <li className={classes.list}>
+                <p className={classes.link}>{name}</p>
+              </li>
+            ))}
         </div>
 
         <div>
-            <h1>Irena Hakobyan</h1>
+            <h1> {values.firstName} </h1>
             <div>
-              <h2>My reviews</h2>
+              <h2>{values.username}</h2>
             </div>
         </div>
+
+        <div>
+            <h1> My Reviews </h1>
+        </div>
+        {/* {reviews.map((review) => (
+              <li>
+              <h2>{values.username}</h2>
+                <p>{review}</p>
+              </li>
+            ))} */}
       </div>
     )
+  }
+  else {
+    return(
+    <Login />
+    )
+  }
 }
 

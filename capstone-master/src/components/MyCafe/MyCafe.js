@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MyCafe() {
+
   let history = useHistory();
   const token = localStorage.getItem("token");
 
@@ -75,9 +75,6 @@ export default function MyCafe() {
     });
   };
 
-  let pathArray = window.location.pathname.split("/");
-  let id = pathArray[2];
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -87,6 +84,9 @@ export default function MyCafe() {
       setErrorMessage(e.response?.data.message || "Something went wrong");
     }
   };
+
+  let pathArray = window.location.pathname.split("/");
+  let id = pathArray[2];
 
   async function AddReview(newBest) {
     const { reviews, raitings } = values;

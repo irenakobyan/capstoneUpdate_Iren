@@ -24,7 +24,7 @@ class Cafes extends Component {
             <SearchIcon />
             <InputBase
               placeholder="Search"
-              classes={classes.inputRoot}
+              className={classes.inputRoot}
               inputProps={{ "aria-label": "search" }}
               onChange={this.handleChange}
             />

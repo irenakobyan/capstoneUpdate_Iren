@@ -3,7 +3,6 @@ import Text from '../Text/Text.js';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import classes from './PartnerItems.module.css';
-import RenderCafe from '../../components/Cafes/RenderCafe/RenderCafe.js';
 
 export default function PartnerItems() {
   const [cafes, setCafes] = useState([]);
@@ -24,10 +23,10 @@ return (
   <Text head="Our Partner Restaurants and Cafes" par="We work with more than 50 restaurants and cafes located in Yerevan!" />
    <div className={classes.PartnerItems}>
    { cafes.slice(0, 3).map((cafe) => (
-          <div  className={classes.eachCafe} onClick={() => {
-            history.push('mycafe' + '/' + cafe._id)
+          <div key={cafe._id} className={classes.eachCafe} onClick={() => {
+            history.push('mycafe/' + cafe._id)
           }}>
-          <img src={cafe.selectedFile} style={{width: '50%'}}/>
+          <img alt ="partnerImg" src={cafe.selectedFile} style={{width: '50%'}}/>
      <p>
          <b>{cafe.name}</b> <br />
         Address: {cafe.street_name} <br />
